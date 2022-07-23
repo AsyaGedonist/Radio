@@ -6,7 +6,18 @@ import org.junit.jupiter.api.Test;
 public class RadioTest {
 
     @Test
-    public void shouldDecreaseVolume(){
+    public void shouldCreate() {
+        Radio radio = new Radio();
+
+        radio.setCurrentChanel(5);
+
+        int expected = 5;
+        int actual = radio.getCurrentChanel();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldDecreaseVolume() {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(5);
@@ -19,7 +30,7 @@ public class RadioTest {
 
 
     @Test
-    public void shouldNotDecreaseVolumeLessBottomLine(){
+    public void shouldNotDecreaseVolumeLessBottomLine() {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(-1);
@@ -31,7 +42,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotDecreaseVolumeBottomLine(){
+    public void shouldNotDecreaseVolumeBottomLine() {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(0);
@@ -43,7 +54,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldDecreaseVolumeBottomLine(){
+    public void shouldDecreaseVolumeBottomLine() {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(1);
@@ -55,43 +66,43 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldIncreaseVolumeUpperLine(){
+    public void shouldIncreaseVolumeUpperLine() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(99);
         radio.louder();
 
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldNotIncreaseVolumeUpperLine(){
+    public void shouldNotIncreaseVolumeUpperLine() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.louder();
 
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldNotIncreaseVolumeMoreUpperLine(){
+    public void shouldNotIncreaseVolumeMoreUpperLine() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(11);
+        radio.setCurrentVolume(101);
         radio.louder();
 
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldSetChanel(){
+    public void shouldSetChanel() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(5);
@@ -102,7 +113,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetChanelBottomLine(){
+    public void shouldNotSetChanelBottomLine() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(-1);
@@ -113,7 +124,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetChanelBottomLine(){
+    public void shouldSetChanelBottomLine() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(0);
@@ -124,7 +135,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetChanelMoreBottomLine(){
+    public void shouldSetChanelMoreBottomLine() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(1);
@@ -135,7 +146,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetChanelLessUpperLine(){
+    public void shouldSetChanelLessUpperLine() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(8);
@@ -146,7 +157,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetChanelUpperLine(){
+    public void shouldSetChanelUpperLine() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(9);
@@ -155,8 +166,9 @@ public class RadioTest {
         int actual = radio.getCurrentChanel();
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
-    public void shouldNotSetChanelUpperLine(){
+    public void shouldNotSetChanelUpperLine() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(10);
@@ -167,7 +179,7 @@ public class RadioTest {
     }
 
     @Test
-    public void simpleIncreaseChanel(){
+    public void simpleIncreaseChanel() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(6);
@@ -179,7 +191,7 @@ public class RadioTest {
     }
 
     @Test
-    public void ComplicatedIncreaseChanel(){
+    public void ComplicatedIncreaseChanel() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(9);
@@ -191,7 +203,7 @@ public class RadioTest {
     }
 
     @Test
-    public void simpleDecreaseChanel(){
+    public void simpleDecreaseChanel() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(6);
@@ -203,13 +215,38 @@ public class RadioTest {
     }
 
     @Test
-    public void ComplicatedDecreaseChanel(){
+    public void ComplicatedDecreaseChanel() {
         Radio radio = new Radio();
 
         radio.setCurrentChanel(0);
         radio.prev();
 
         int expected = 9;
+        int actual = radio.getCurrentChanel();
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void ComplicatedDecreaseChanelFifteenChannels() {
+        Radio radio = new Radio(1, 1, 15, 100);
+
+        radio.setCurrentChanel(0);
+        radio.prev();
+
+        int expected = 14;
+        int actual = radio.getCurrentChanel();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ComplicatedIncreaseChanelFifteenChannels() {
+        Radio radio = new Radio(1, 1, 15, 100);
+
+        radio.setCurrentChanel(14);
+        radio.next();
+
+        int expected = 0;
         int actual = radio.getCurrentChanel();
         Assertions.assertEquals(expected, actual);
     }
