@@ -1,40 +1,18 @@
 package SmartHouse;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {
     private int currentChanel;
     private int currentVolume;
     private int countChanel = 10;
     private int maxVolume = 100;
-
-    public Radio(int countChanel) {
-        this.countChanel = countChanel;
-    }
-
-    public Radio() {
-    }
-
-    public int getCurrentChanel() {
-        return currentChanel;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0) {
-            currentVolume = 0;
-        } else if (newCurrentVolume > maxVolume) {
-            currentVolume = maxVolume;
-        } else
-            currentVolume = newCurrentVolume;
-    }
-
-    public void louder() {
-        if (currentVolume < maxVolume) {
-            currentVolume = currentVolume + 1;
-        }
-    }
 
     public void quiet() {
         if (currentVolume > 0) {
@@ -42,14 +20,10 @@ public class Radio {
         }
     }
 
-    public void setCurrentChanel(int newCurrentChanel) {
-        if (newCurrentChanel < 0) {
-            return;
+    public void louder() {
+        if (currentVolume < maxVolume) {
+            currentVolume = currentVolume + 1;
         }
-        if (newCurrentChanel > countChanel - 1) {
-            return;
-        }
-        currentChanel = newCurrentChanel;
     }
 
     public void prev() {
@@ -67,4 +41,25 @@ public class Radio {
             currentChanel = currentChanel + 1;
         }
     }
+
+    public void setCurrentChanel(int newCurrentChanel) {
+        if (newCurrentChanel < 0) {
+            return;
+        }
+        if (newCurrentChanel > countChanel - 1) {
+            return;
+        }
+        currentChanel = newCurrentChanel;
+    }
+
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume < 0) {
+            currentVolume = 0;
+        } else if (newCurrentVolume > maxVolume) {
+            currentVolume = maxVolume;
+        } else
+            currentVolume = newCurrentVolume;
+    }
+
 }
+
