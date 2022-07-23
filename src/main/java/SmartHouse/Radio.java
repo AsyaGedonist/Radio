@@ -3,6 +3,15 @@ package SmartHouse;
 public class Radio {
     private int currentChanel;
     private int currentVolume;
+    private int countChanel = 10;
+    private int maxVolume = 100;
+
+    public Radio(int countChanel) {
+        this.countChanel = countChanel;
+    }
+
+    public Radio() {
+    }
 
     public int getCurrentChanel() {
         return currentChanel;
@@ -15,14 +24,14 @@ public class Radio {
     public void setCurrentVolume(int newCurrentVolume) {
         if (newCurrentVolume < 0) {
             currentVolume = 0;
-        } else if (newCurrentVolume > 10) {
-            currentVolume = 10;
+        } else if (newCurrentVolume > maxVolume) {
+            currentVolume = maxVolume;
         } else
-        currentVolume = newCurrentVolume;
+            currentVolume = newCurrentVolume;
     }
 
     public void louder() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         }
     }
@@ -37,22 +46,22 @@ public class Radio {
         if (newCurrentChanel < 0) {
             return;
         }
-        if (newCurrentChanel > 9) {
+        if (newCurrentChanel > countChanel - 1) {
             return;
         }
         currentChanel = newCurrentChanel;
     }
 
-    public void prev(){
-        if (currentChanel == 0){
-            currentChanel = 9;
+    public void prev() {
+        if (currentChanel == 0) {
+            currentChanel = countChanel - 1;
         } else {
             currentChanel = currentChanel - 1;
         }
     }
 
-    public void next(){
-        if (currentChanel == 9){
+    public void next() {
+        if (currentChanel == countChanel - 1) {
             currentChanel = 0;
         } else {
             currentChanel = currentChanel + 1;
